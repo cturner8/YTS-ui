@@ -1,11 +1,11 @@
 <template>
   <div class="header">
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand">
+    <b-navbar variant="dark" type="dark">
+      <b-navbar-brand>
         <img src="../assets/youtube.svg" class="img-fluid" alt loading="lazy" />
         YouTube Data Analysis
-      </a>
-      <span class="navbar-text">
+      </b-navbar-brand>
+      <b-nav-text>
         <span v-if="has_filters">
           <strong>Filters:</strong>
           <span v-for="[key, value] in Object.entries(filter)" :key="key">
@@ -14,11 +14,9 @@
             ]
           </span>
         </span>
-        <a href="/upload" id="test" v-else
-          >Gain insight into your YouTube data</a
-        >
-      </span>
-    </nav>
+        <b-navbar-item class="ml-auto" v-else right>Gain insight into your YouTube data</b-navbar-item>
+      </b-nav-text>
+    </b-navbar>
   </div>
 </template>
 
@@ -29,8 +27,8 @@ export default {
     return {
       has_filters: false,
       filter: {},
-      name: "Cameron",
+      name: "Cameron"
     };
-  },
+  }
 };
 </script>

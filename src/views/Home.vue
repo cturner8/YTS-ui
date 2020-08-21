@@ -1,38 +1,30 @@
 <template>
   <div class="home">
     <Header />
-    <div class="row">
-      <div class="col contentDivs" v-if="ytData.channels">
+    <b-row>
+      <b-col class="contentDivs" v-if="ytData.channels">
         <h2>Most popular channels</h2>
-        <ul class="list-group">
-          <li
-            class="list-group-item"
-            v-for="[key, value] in Object.entries(ytData.channels)"
-            :key="key"
-          >
+        <b-list-group>
+          <b-list-group-item v-for="[key, value] in Object.entries(ytData.channels)" :key="key">
             <span class="leftAlign">{{ key }}</span>
             <span class="rightAlign">
               <strong>{{ value }}</strong>
             </span>
-          </li>
-        </ul>
-      </div>
-      <div class="col contentDivs" v-if="ytData.raw_data">
+          </b-list-group-item>
+        </b-list-group>
+      </b-col>
+      <b-col class="contentDivs" v-if="ytData.raw_data">
         <h2>Videos watched</h2>
-        <ul
-          class="list-group"
-          v-for="(item, index) in ytData.raw_data"
-          :key="index"
-        >
-          <li class="list-group-item" v-if="item.subtitles">
+        <b-list-group v-for="(item, index) in ytData.raw_data" :key="index">
+          <b-list-group-item v-if="item.subtitles">
             <span class="leftAlign">{{ item.title }}</span>
             <span class="rightAlign">
               <strong>{{ item.subtitles[0].name }}</strong>
             </span>
-          </li>
-        </ul>
-      </div>
-    </div>
+          </b-list-group-item>
+        </b-list-group>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -43,7 +35,7 @@ import axios from "axios";
 export default {
   name: "Home",
   components: {
-    Header,
+    Header
   },
   data() {
     return {
@@ -51,16 +43,16 @@ export default {
         youtube_count: 0,
         youtube_music_count: 0,
         channels: [],
-        raw_data: [],
-      },
+        raw_data: []
+      }
     };
   },
   created() {
     axios
       .get("http://localhost:5000/search")
-      .then((res) => (this.ytData = { ...res.data.items }))
-      .catch((err) => console.log(err));
-  },
+      .then(res => (this.ytData = { ...res.data.items }))
+      .catch(err => console.log(err));
+  }
 };
 </script>
 
