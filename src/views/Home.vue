@@ -1,45 +1,24 @@
 <template>
   <div class="home">
     <Header />
-    <b-row>
-      <b-col class="contentDivs" v-if="ytData.channels">
-        <h2>Most popular channels</h2>
-        <b-list-group>
-          <b-list-group-item v-for="[key, value] in Object.entries(ytData.channels)" :key="key">
-            <span class="leftAlign">{{ key }}</span>
-            <span class="rightAlign">
-              <strong>{{ value }}</strong>
-            </span>
-          </b-list-group-item>
-        </b-list-group>
-      </b-col>
-      <b-col class="contentDivs" v-if="ytData.raw_data">
-        <h2>Videos watched</h2>
-        <b-list-group v-for="(item, index) in ytData.raw_data" :key="index">
-          <b-list-group-item v-if="item.subtitles">
-            <span class="leftAlign">{{ item.title }}</span>
-            <span class="rightAlign">
-              <strong>{{ item.subtitles[0].name }}</strong>
-            </span>
-          </b-list-group-item>
-        </b-list-group>
-      </b-col>
-    </b-row>
+    <Tables :items="items" />
   </div>
 </template>
 
 <script>
 import Header from "../components/Header";
+import Tables from "../components/Tables";
 import axios from "axios";
 
 export default {
   name: "Home",
   components: {
-    Header
+    Header,
+    Tables
   },
   data() {
     return {
-      ytData: {
+      items: {
         youtube_count: 0,
         youtube_music_count: 0,
         channels: [],
@@ -50,7 +29,7 @@ export default {
   created() {
     axios
       .get("http://localhost:5000/search")
-      .then(res => (this.ytData = { ...res.data.items }))
+      .then(res => (this.items = { ...res.data.items }))
       .catch(err => console.log(err));
   }
 };
@@ -65,14 +44,12 @@ export default {
   height: 100%;
 }
 
+.rightDiv,
 .leftDiv {
   height: calc(100% - 7rem);
+  width: 50%;
   overflow-y: scroll;
-}
-
-.rightDiv {
-  height: calc(100% - 7rem);
-  overflow-y: scroll;
+  max-height: 100vh;
 }
 
 .contentDivs {

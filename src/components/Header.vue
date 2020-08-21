@@ -14,7 +14,7 @@
             ]
           </span>
         </span>
-        <b-navbar-item class="ml-auto" v-else right>Gain insight into your YouTube data</b-navbar-item>
+        <b-nav-text class="ml-auto" v-else right>Gain insight into your YouTube data</b-nav-text>
       </b-nav-text>
     </b-navbar>
   </div>
