@@ -39,4 +39,11 @@ export default {
 #nav a.router-link-exact-active {
   color: red;
 }
+
+.header {
+  height: 3rem;
+}
+.home {
+  height: calc(100vh - 5rem);
+}
 </style>
