@@ -1,0 +1,27 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $grey;
+}
+
+#nav {
+  margin-bottom: $nav-margin;
+}
+
+#nav a {
+  font-weight: bold;
+  color: $white;
+}
+
+#nav a.router-link-exact-active {
+  color: $red;
+}
+
+.header {
+  height: $nav-header-height;
+}
+.main-content {
+  height: calc(100vh - #{$nav-total-height});
+}
