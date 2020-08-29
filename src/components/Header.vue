@@ -14,7 +14,9 @@
             ]
           </span>
         </span>
-        <b-nav-text class="ml-auto" v-else right>Gain insight into your YouTube data</b-nav-text>
+        <b-nav-text class="ml-auto" v-else right
+          >Gain insight into your YouTube data</b-nav-text
+        >
       </b-nav-text>
       <b-navbar-nav class="ml-auto">
         <b-nav-item to="/" right>Home</b-nav-item>
@@ -32,8 +34,8 @@ export default {
     return {
       has_filters: false,
       filter: {},
-      name: "Cameron"
+      name: "Cameron",
     };
-  }
+  },
 };
 </script>
