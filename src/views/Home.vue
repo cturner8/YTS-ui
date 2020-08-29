@@ -1,19 +1,16 @@
 <template>
   <div class="home">
-    <Header />
     <Tables :items="items" />
   </div>
 </template>
 
 <script>
-import Header from "../components/Header";
 import Tables from "../components/Tables";
 import axios from "axios";
 
 export default {
   name: "Home",
   components: {
-    Header,
     Tables
   },
   data() {
