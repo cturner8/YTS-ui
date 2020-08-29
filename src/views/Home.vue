@@ -1,16 +1,14 @@
 <template>
   <div class="main-content home">
     <Tables v-if="!loading" :items="items" />
-    <b-jumbotron v-else>
-      <b-overlay show rounded="sm">
-        <b-card aria-hidden="true"></b-card>
-      </b-overlay>
-    </b-jumbotron>
+    <b-container v-else fluid>
+      <b-spinner variant="danger"></b-spinner>
+    </b-container>
   </div>
 </template>
 
 <script>
-import Tables from "../components/Tables";
+import { Tables } from "../components";
 import axios from "axios";
 
 export default {
@@ -29,13 +27,22 @@ export default {
       },
     };
   },
+  methods: {
+    async searchData(body) {
+      this.loading = true;
+      await axios
+        .post("http://localhost:5000/search", body)
+        .then((res) => (this.items = { ...res.data.items }))
+        .catch((err) => console.log(err));
+      this.loading = false;
+    },
+  },
   async created() {
-    this.loading = true;
-    await axios
-      .get("http://localhost:5000/search")
-      .then((res) => (this.items = { ...res.data.items }))
-      .catch((err) => console.log(err));
-    this.loading = false;
+    await this.searchData({
+      title: "",
+      dateTo: "",
+      dateFrom: "",
+    });
   },
 };
 </script>
