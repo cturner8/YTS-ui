@@ -14,7 +14,7 @@ import axios from "axios";
 export default {
   name: "Home",
   components: {
-    Tables,
+    Tables
   },
   data() {
     return {
@@ -23,8 +23,8 @@ export default {
         youtube_count: 0,
         youtube_music_count: 0,
         channels: [],
-        raw_data: [],
-      },
+        raw_data: []
+      }
     };
   },
   methods: {
@@ -32,17 +32,17 @@ export default {
       this.loading = true;
       await axios
         .post("http://localhost:5000/search", body)
-        .then((res) => (this.items = { ...res.data.items }))
-        .catch((err) => console.log(err));
+        .then(res => (this.items = { ...res.data.items }))
+        .catch(err => console.log(err));
       this.loading = false;
-    },
+    }
   },
   async created() {
     await this.searchData({
-      title: "",
+      title: "rolex",
       dateTo: "",
-      dateFrom: "",
+      dateFrom: ""
     });
-  },
+  }
 };
 </script>

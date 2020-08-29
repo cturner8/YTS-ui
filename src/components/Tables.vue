@@ -1,5 +1,5 @@
 <template>
-  <div class="mainContent">
+  <div class="table-container">
     <b-container fluid>
       <b-row>
         <b-col class="contentDivs" v-if="items.channels">
