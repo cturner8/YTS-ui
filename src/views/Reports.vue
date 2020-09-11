@@ -1,15 +1,15 @@
 <template>
   <div class="main-content home">
-    <Tables v-if="!loading" :items="items" />
+    <Tables v-if="!isLoading" :items="reportData" />
     <b-container v-else fluid>
-      <b-spinner variant="danger"></b-spinner>
+      <b-spinner variant="danger" />
     </b-container>
   </div>
 </template>
 
 <script>
 import { Tables } from "../components";
-import axios from "axios";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Reports",
@@ -17,28 +17,18 @@ export default {
     Tables,
   },
   data() {
-    return {
-      loading: false,
-      items: {
-        youtube_count: 0,
-        youtube_music_count: 0,
-        channels: [],
-        raw_data: [],
-      },
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(["reportData", "isLoading"]),
   },
   methods: {
+    ...mapActions(["searchReportData"]),
     async searchData(body) {
-      this.loading = true;
-      await axios
-        .post(`${process.env.VUE_APP_DATA_ENDPOINT}/search`, body)
-        .then((res) => (this.items = { ...res.data.items }))
-        .catch((err) => console.log(err));
-      this.loading = false;
+      await this.searchReportData(body);
     },
   },
   async created() {
-    console.log(process.env);
     await this.searchData({
       title: "rolex",
       dateTo: "",

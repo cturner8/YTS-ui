@@ -1,6 +1,6 @@
 <template>
   <div class="upload-file">
-    <b-container>
+    <b-container v-if="!isLoading">
       <b-form-file
         class="file-selector"
         v-model="file"
@@ -13,7 +13,7 @@
         <b-button @click="clearFiles" class="mr-2">Clear file</b-button>
         <b-button
           :disabled="!file"
-          @click="submitFiles"
+          @click="submitFiles(file)"
           class="mr-2"
           variant="success"
           >Submit</b-button
@@ -23,11 +23,14 @@
         Selected file: {{ file ? file.name : "" }}
       </div>
     </b-container>
+    <b-container v-else fluid>
+      <b-spinner variant="danger" />
+    </b-container>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Upload",
@@ -36,32 +39,13 @@ export default {
       file: null,
     };
   },
+  computed: {
+    ...mapState(["isLoading"]),
+  },
   methods: {
+    ...mapActions(["searchReportData", "submitFiles"]),
     clearFiles() {
       this.file = null;
-    },
-    async submitFiles() {
-      this.loading = true;
-      const reader = new FileReader();
-
-      reader.readAsText(this.file);
-      reader.onload = async () => {
-        try {
-          const fileData = JSON.parse(reader.result);
-          const body = {
-            fileData,
-            title: "rolex",
-          };
-
-          await axios
-            .post(`${process.env.VUE_APP_DATA_ENDPOINT}/search`, body)
-            .then(() => console.log("success"))
-            .catch((err) => console.log(err));
-        } catch (e) {
-          console.log("could not parse file");
-        }
-      };
-      this.loading = false;
     },
   },
 };
