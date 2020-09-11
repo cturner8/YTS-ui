@@ -11,9 +11,17 @@
       ></b-form-file>
       <div class="upload-buttons">
         <b-button @click="clearFiles" class="mr-2">Clear file</b-button>
-        <b-button :disabled="!file" @click="submitFiles" class="mr-2" variant="success">Submit</b-button>
+        <b-button
+          :disabled="!file"
+          @click="submitFiles"
+          class="mr-2"
+          variant="success"
+          >Submit</b-button
+        >
       </div>
-      <div class="selected-file mt-3">Selected file: {{ file ? file.name : '' }}</div>
+      <div class="selected-file mt-3">
+        Selected file: {{ file ? file.name : "" }}
+      </div>
     </b-container>
   </div>
 </template>
@@ -25,7 +33,7 @@ export default {
   name: "Upload",
   data() {
     return {
-      file: null
+      file: null,
     };
   },
   methods: {
@@ -42,19 +50,19 @@ export default {
           const fileData = JSON.parse(reader.result);
           const body = {
             fileData,
-            title: "rolex"
+            title: "rolex",
           };
 
           await axios
-            .post("http://localhost:5000/search", body)
+            .post(`${process.env.VUE_APP_DATA_ENDPOINT}/search`, body)
             .then(() => console.log("success"))
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
         } catch (e) {
           console.log("could not parse file");
         }
       };
       this.loading = false;
-    }
-  }
+    },
+  },
 };
 </script>

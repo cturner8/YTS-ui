@@ -1,5 +1,6 @@
-import Home from "./Home.vue";
+import Reports from "./Reports.vue";
 import Test from "./Test.vue";
 import About from "./About.vue";
+import Home from "./Home.vue";
 
-export { Home, Test, About };
+export { Reports, Test, About, Home };
