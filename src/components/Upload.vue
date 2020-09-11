@@ -42,7 +42,7 @@ export default {
           const fileData = JSON.parse(reader.result);
           const body = {
             fileData,
-            title: ""
+            title: "rolex"
           };
 
           await axios
