@@ -1,0 +1,20 @@
+.rightDiv,
+.leftDiv {
+  height: calc(100% - #{$nav-total-height});
+  width: 50%;
+  overflow-y: scroll;
+  max-height: 100vh;
+}
+
+.contentDivs {
+  height: calc(100vh - #{$nav-total-height});
+  overflow-y: scroll;
+}
+
+.leftAlign {
+  float: left;
+}
+
+.rightAlign {
+  float: right;
+}
