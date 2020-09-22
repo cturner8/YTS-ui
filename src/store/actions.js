@@ -1,7 +1,7 @@
 import axios from "axios";
 const searchData = async (body) => {
   return await axios
-    .post(`${process.env.VUE_APP_DATA_ENDPOINT}/search`, body)
+    .post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body)
     .then((res) => res.data.items)
     .catch((err) => console.log(err));
 };
