@@ -1,0 +1,23 @@
+$divider-colour: $light-grey;
+$divider-strength: 0.1rem;
+$divider-margin: 1rem;
+
+.flex-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+
+  &.column {
+    flex-direction: column;
+  }
+}
+
+.divider-top {
+  border-top: #{$divider-strength} solid #{$divider-colour};
+  margin: #{$divider-margin} 0;
+}
+
+.divider-bottom {
+  border-bottom: #{$divider-strength} solid #{$divider-colour};
+  margin: #{$divider-margin} 0;
+}

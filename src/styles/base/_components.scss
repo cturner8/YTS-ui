@@ -24,4 +24,9 @@
 }
 .main-content {
   height: calc(100vh - #{$nav-total-height});
+
+  &.center {
+    max-width: 75%;
+    margin: 0 auto;
+  }
 }

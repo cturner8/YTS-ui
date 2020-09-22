@@ -1,6 +1,7 @@
 import Reports from "./Reports.vue";
-import Test from "./Test.vue";
+import Upload from "./Upload.vue";
 import About from "./About.vue";
 import Home from "./Home.vue";
+import NotFound from "./NotFound.vue";
 
-export { Reports, Test, About, Home };
+export { Reports, Upload, About, Home, NotFound };

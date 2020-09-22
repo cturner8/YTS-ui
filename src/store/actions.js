@@ -14,7 +14,7 @@ export default {
 
     commit("setLoading", false);
   },
-  submitFiles: async ({ commit }, file) => {
+  submitFiles: async ({ commit }, { file, filter }) => {
     commit("setLoading", true);
 
     const reader = new FileReader();
@@ -25,7 +25,7 @@ export default {
         const fileData = JSON.parse(reader.result);
         const body = {
           fileData,
-          title: "rolex",
+          ...filter,
         };
 
         const payload = await searchData(body);

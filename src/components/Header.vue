@@ -20,9 +20,9 @@
       </b-nav-text>
       <b-navbar-nav class="ml-auto">
         <b-nav-item to="/" right>Home</b-nav-item>
+        <b-nav-item to="/upload" right>Upload</b-nav-item>
         <b-nav-item to="/reports" right>Reports</b-nav-item>
         <b-nav-item to="/about" right>About</b-nav-item>
-        <b-nav-item to="/test" right>Test</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content home">
+  <div class="main-content reports">
     <Tables :items="reportData" />
   </div>
 </template>
