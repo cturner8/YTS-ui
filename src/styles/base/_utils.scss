@@ -1,0 +1,17 @@
+$divider-colour: $grey;
+$divider-strength: 0.1rem;
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.divider-top {
+  border-top: #{$divider-strength} solid #{$divider-colour};
+}
+
+.divider-bottom {
+  border-bottom: #{$divider-strength} solid #{$divider-colour};
+}
