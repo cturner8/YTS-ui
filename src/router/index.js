@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import { Reports, About, Test, Home, NotFound } from "../views";
+import { Reports, About, Upload, Home, NotFound } from "../views";
 
 Vue.use(VueRouter);
 
@@ -24,7 +24,7 @@ const routes = [
   {
     path: "/upload",
     name: "Upload",
-    component: Test,
+    component: Upload,
   },
   {
     path: "*",
