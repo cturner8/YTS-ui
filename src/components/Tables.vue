@@ -1,11 +1,14 @@
 <template>
   <div class="table-container">
     <b-container fluid>
-      <b-row>
+      <b-row v-if="items.channels || items.raw_data">
         <b-col class="contentDivs" v-if="items.channels">
           <h2>Most popular channels</h2>
           <b-list-group>
-            <b-list-group-item v-for="[key, value] in Object.entries(items.channels)" :key="key">
+            <b-list-group-item
+              v-for="[key, value] in Object.entries(items.channels)"
+              :key="key"
+            >
               <span class="leftAlign">{{ key }}</span>
               <span class="rightAlign">
                 <strong>{{ value }}</strong>
@@ -25,6 +28,9 @@
           </b-list-group>
         </b-col>
       </b-row>
+      <div v-else>
+        No data to view yet.
+      </div>
     </b-container>
   </div>
 </template>
@@ -33,10 +39,10 @@
 export default {
   name: "Tables",
   props: {
-    items: Object
+    items: Object,
   },
   data() {
     return {};
-  }
+  },
 };
 </script>
