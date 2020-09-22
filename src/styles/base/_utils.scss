@@ -4,9 +4,12 @@ $divider-margin: 1rem;
 
 .flex-container {
   display: flex;
-  justify-content: center;
+  height: 100%;
   align-items: center;
-  height: 100vh;
+
+  &.column {
+    flex-direction: column;
+  }
 }
 
 .divider-top {
