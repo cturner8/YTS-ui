@@ -1,8 +1,14 @@
 export default {
-  setLoading: (state, loading) => {
-    state.isLoading = loading;
+  setLoading: (state, payload) => {
+    state.isLoading = payload;
   },
-  setReportData: (state, items) => {
-    state.reportData = { ...items };
+  setReportData: (state, payload) => {
+    state.reportData = { ...payload };
+  },
+  setFileData: (state, payload) => {
+    state.file = payload;
+  },
+  setFilter: (state, payload) => {
+    state.filter = payload;
   },
 };

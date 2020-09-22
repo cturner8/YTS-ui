@@ -29,7 +29,7 @@
         </b-form-group>
 
         <b-button
-          @click.prevent="submitFiles({file, filter})"
+          @click.prevent="handleClick"
           :disabled="!file"
           type="button"
           variant="danger"
@@ -54,6 +54,11 @@ export default {
     ...mapActions(["submitFiles"]),
     clearFiles() {
       this.file = null;
+    },
+    handleClick() {
+      const { file, filter } = this;
+
+      this.submitFiles({ file, filter });
     }
   }
 };
