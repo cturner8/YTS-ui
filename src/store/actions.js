@@ -7,22 +7,18 @@ const searchData = async (body) => {
 
 export default {
   searchReportData: async ({ commit }, body) => {
-    commit("setLoading", true);
-    commit("setError", undefined);
+    commit("setRequestProgress", undefined);
     try {
       const { data } = await searchData(body);
       commit("setReportData", data.items);
-      commit("setError", false);
+      commit("setRequestProgress", false);
     } catch (e) {
       console.log(e);
-      commit("setError", true);
+      commit("setRequestProgress", true);
     }
-
-    commit("setLoading", false);
   },
   submitFiles: async ({ commit }, { file, filter }) => {
-    commit("setLoading", true);
-    commit("setError", undefined);
+    commit("setRequestProgress", undefined);
 
     const reader = new FileReader();
 
@@ -39,14 +35,12 @@ export default {
         const { items = {} } = data;
         items.channels = helpers.sortItems(items.channels);
 
-        commit("setError", false);
         commit("setReportData", items);
+        commit("setRequestProgress", false);
       } catch (e) {
         console.log("could not parse file");
-        commit("setError", true);
+        commit("setRequestProgress", true);
       }
     };
-
-    commit("setLoading", false);
   },
 };
