@@ -1,4 +1,6 @@
 import axios from "axios";
+import { helpers } from "../libs";
+
 const searchData = async (body) => {
   return await axios.post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body);
 };
@@ -33,9 +35,12 @@ export default {
           ...filter,
         };
 
-        const { data } = await searchData(body);
+        const { data = {} } = await searchData(body);
+        const { items = {} } = data;
+        items.channels = helpers.sortItems(items.channels);
+
         commit("setError", false);
-        commit("setReportData", data.items);
+        commit("setReportData", items);
       } catch (e) {
         console.log("could not parse file");
         commit("setError", true);
