@@ -1,21 +1,26 @@
 import axios from "axios";
 const searchData = async (body) => {
-  return await axios
-    .post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body)
-    .then((res) => res.data.items)
-    .catch((err) => console.log(err));
+  return await axios.post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body);
 };
 
 export default {
   searchReportData: async ({ commit }, body) => {
     commit("setLoading", true);
-    const payload = await searchData(body);
-    commit("setReportData", payload);
+    commit("setError", undefined);
+    try {
+      const { data } = await searchData(body);
+      commit("setReportData", data.items);
+      commit("setError", false);
+    } catch (e) {
+      console.log(e);
+      commit("setError", true);
+    }
 
     commit("setLoading", false);
   },
   submitFiles: async ({ commit }, { file, filter }) => {
     commit("setLoading", true);
+    commit("setError", undefined);
 
     const reader = new FileReader();
 
@@ -28,10 +33,12 @@ export default {
           ...filter,
         };
 
-        const payload = await searchData(body);
-        commit("setReportData", payload);
+        const { data } = await searchData(body);
+        commit("setError", false);
+        commit("setReportData", data.items);
       } catch (e) {
         console.log("could not parse file");
+        commit("setError", true);
       }
     };
 

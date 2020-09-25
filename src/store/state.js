@@ -3,4 +3,5 @@ export default {
   reportData: {},
   file: null,
   filter: {},
+  error: undefined,
 };

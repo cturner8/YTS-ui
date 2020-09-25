@@ -11,4 +11,7 @@ export default {
   setFilter: (state, payload) => {
     state.filter = payload;
   },
+  setError: (state, payload) => {
+    state.error = payload;
+  },
 };
