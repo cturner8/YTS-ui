@@ -12,7 +12,9 @@
       <div class="upload-buttons">
         <b-button @click="clearFiles" class="mr-2">Clear file</b-button>
       </div>
-      <div class="selected-file mt-3">Selected file: {{ file ? file.name : "" }}</div>
+      <div class="selected-file mt-3">
+        Selected file: {{ file ? file.name : "" }}
+      </div>
     </b-container>
     <b-container class="filter-form mt-3">
       <b-form>
@@ -33,14 +35,18 @@
           :disabled="!file"
           type="button"
           variant="danger"
-        >Submit</b-button>
+          >Submit</b-button
+        >
+        <div class="m-3 feedbackMessage" :class="getErrorClass()">
+          {{ feedbackMessage }}
+        </div>
       </b-form>
     </b-container>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "FileUploader",
@@ -49,6 +55,19 @@ export default {
       file: null,
       filter: {}
     };
+  },
+  computed: {
+    ...mapState(["error"]),
+    feedbackMessage() {
+      switch (this.error) {
+        case true:
+          return "Upload Failed";
+        case false:
+          return "Upload Successful";
+        default:
+          return "";
+      }
+    }
   },
   methods: {
     ...mapActions(["submitFiles"]),
@@ -59,6 +78,16 @@ export default {
       const { file, filter } = this;
 
       this.submitFiles({ file, filter });
+    },
+    getErrorClass() {
+      switch (this.error) {
+        case true:
+          return "error";
+        case false:
+          return "success";
+        default:
+          return;
+      }
     }
   }
 };

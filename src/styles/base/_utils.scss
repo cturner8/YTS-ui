@@ -21,3 +21,13 @@ $divider-margin: 1rem;
   border-bottom: #{$divider-strength} solid #{$divider-colour};
   margin: #{$divider-margin} 0;
 }
+
+.feedbackMessage {
+  &.error {
+    color: $red;
+  }
+
+  &.success {
+    color: $green;
+  }
+}

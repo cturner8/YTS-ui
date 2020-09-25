@@ -11,4 +11,13 @@ export default {
   setFilter: (state, payload) => {
     state.filter = payload;
   },
+  setRequestProgress: (state, payload) => {
+    if (state.isLoading) {
+      state.isLoading = false;
+    } else {
+      state.isLoading = true;
+    }
+
+    state.error = payload;
+  },
 };
