@@ -2,7 +2,9 @@
   "name": "yts-data",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://cturner8.github.io/YTS-ui",
   "scripts": {
+    "deploy": "gh-pages -d dist",
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -27,6 +29,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "gh-pages": "^3.1.0",
     "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.11"
   },
