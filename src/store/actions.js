@@ -1,5 +1,20 @@
 import axios from "axios";
 import { helpers } from "../libs";
+import { auth } from "../libs/firebase";
+
+axios.interceptors.request.use(async (config) => {
+  try {
+    const token = await auth.currentUser.getIdToken();
+
+    const { headers } = config;
+    if (!headers.Authorization) {
+      headers.Authorization = token;
+    }
+    return config;
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 const searchData = async (body) => {
   return await axios.post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body);

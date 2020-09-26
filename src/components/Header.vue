@@ -18,11 +18,14 @@
           >Gain insight into your YouTube data</b-nav-text
         >
       </b-nav-text>
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav v-if="user" class="ml-auto">
         <b-nav-item to="/" right>Home</b-nav-item>
         <b-nav-item to="/upload" right>Upload</b-nav-item>
         <b-nav-item to="/reports" right>Reports</b-nav-item>
         <b-nav-item to="/about" right>About</b-nav-item>
+      </b-navbar-nav>
+      <b-navbar-nav v-else class="ml-auto">
+        <b-button @click="signIn">Login</b-button>
       </b-navbar-nav>
     </b-navbar>
   </div>
@@ -31,12 +34,13 @@
 <script>
 export default {
   name: "Header",
+  props: ["user", "signIn"],
   data() {
     return {
       has_filters: false,
       filter: {},
-      name: "Cameron",
+      name: "Cameron"
     };
-  },
+  }
 };
 </script>
