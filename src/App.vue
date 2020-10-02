@@ -17,7 +17,7 @@ import { auth } from "./libs/firebase";
 let unsubscribe: Function;
 
 type IData = {
-  user: object | null;
+  user: firebase.User | null;
 };
 
 export default Vue.extend({
