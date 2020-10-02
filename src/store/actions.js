@@ -1,5 +1,23 @@
 import axios from "axios";
 import { helpers } from "../libs";
+import { auth } from "../libs/firebase";
+
+axios.interceptors.request.use(async (config) => {
+  try {
+    const { currentUser } = auth;
+    if (!currentUser) throw "not logged in";
+
+    const token = await currentUser.getIdToken();
+
+    const { headers } = config;
+    if (!headers.Authorization) {
+      headers.Authorization = token;
+    }
+    return config;
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 const searchData = async (body) => {
   return await axios.post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body);
@@ -38,7 +56,7 @@ export default {
         commit("setReportData", items);
         commit("setRequestProgress", false);
       } catch (e) {
-        console.log("could not parse file");
+        console.log(e);
         commit("setRequestProgress", true);
       }
     };
