@@ -49,7 +49,7 @@ export default {
     reader.readAsText(file);
     reader.onload = async () => {
       try {
-        const fileData = reader.result;
+        const fileData = JSON.parse(reader.result as any);
         const body = {
           fileData,
           ...filter,
