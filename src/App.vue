@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header id="nav" :signIn="signIn" :user="user" />
+    <Header id="nav" :signIn="signIn" :signOut="signOut" :user="user" />
     <b-overlay :show="isLoading" spinner-variant="danger" :opacity="1" fluid>
       <router-view />
     </b-overlay>
@@ -13,6 +13,8 @@ import { mapState } from "vuex";
 
 import { auth } from "./libs/firebase";
 
+let unsubscribe;
+
 export default {
   name: "App",
   components: {
@@ -24,11 +26,16 @@ export default {
     };
   },
   async mounted() {
-    const authUser = await auth.currentUser;
-
-    if (authUser) {
-      this.user = authUser;
-    }
+    unsubscribe = await auth.onAuthStateChanged(user => {
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    });
+  },
+  destroyed() {
+    unsubscribe();
   },
   computed: {
     ...mapState(["isLoading"])
@@ -37,14 +44,13 @@ export default {
     async signIn() {
       try {
         await auth.signInAnonymously();
-
-        await auth.onAuthStateChanged(user => {
-          if (user) {
-            this.user = user;
-          } else {
-            this.user = null;
-          }
-        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async signOut() {
+      try {
+        await auth.signOut();
       } catch (e) {
         console.log(e);
       }

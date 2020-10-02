@@ -4,7 +4,10 @@ import { auth } from "../libs/firebase";
 
 axios.interceptors.request.use(async (config) => {
   try {
-    const token = await auth.currentUser.getIdToken();
+    const { currentUser } = auth;
+    if (!currentUser) throw "not logged in";
+
+    const token = await currentUser.getIdToken();
 
     const { headers } = config;
     if (!headers.Authorization) {
@@ -53,7 +56,7 @@ export default {
         commit("setReportData", items);
         commit("setRequestProgress", false);
       } catch (e) {
-        console.log("could not parse file");
+        console.log(e);
         commit("setRequestProgress", true);
       }
     };
