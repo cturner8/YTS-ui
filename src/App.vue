@@ -7,20 +7,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { Header } from "./components";
 import { mapState } from "vuex";
 
 import { auth } from "./libs/firebase";
 
-let unsubscribe;
+let unsubscribe: Function;
 
-export default {
+type IData = {
+  user: object | null;
+};
+
+export default Vue.extend({
   name: "App",
   components: {
     Header
   },
-  data() {
+  data(): IData {
     return {
       user: null
     };
@@ -56,5 +61,5 @@ export default {
       }
     }
   }
-};
+});
 </script>
