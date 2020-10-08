@@ -11,31 +11,33 @@
 import Vue from "vue";
 import { Header } from "./components";
 import { mapState } from "vuex";
+import router from "./router";
 
 import { auth } from "./libs/firebase";
 
 let unsubscribe: Function;
 
-type IData = {
+interface IData {
   user: firebase.User | null;
-};
+}
 
 export default Vue.extend({
   name: "App",
   components: {
-    Header
+    Header,
   },
   data(): IData {
     return {
-      user: null
+      user: null,
     };
   },
   async mounted() {
-    unsubscribe = await auth.onAuthStateChanged(user => {
+    unsubscribe = await auth.onAuthStateChanged((user) => {
       if (user) {
         this.user = user;
       } else {
         this.user = null;
+        router.push("/");
       }
     });
   },
@@ -43,7 +45,7 @@ export default Vue.extend({
     unsubscribe();
   },
   computed: {
-    ...mapState(["isLoading"])
+    ...mapState(["isLoading"]),
   },
   methods: {
     async signIn() {
@@ -59,7 +61,7 @@ export default Vue.extend({
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 });
 </script>
