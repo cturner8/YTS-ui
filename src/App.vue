@@ -9,11 +9,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Header } from "./components";
+import { Header } from "@/components";
 import { mapState } from "vuex";
-import router from "./router";
+import router from "@/router";
 
-import { auth } from "./libs/firebase";
+import { auth } from "@/libs/firebase";
 
 let unsubscribe: Function;
 
@@ -37,7 +37,9 @@ export default Vue.extend({
         this.user = user;
       } else {
         this.user = null;
-        router.push("/");
+        if (router.currentRoute.path !== "/") {
+          router.push("/");
+        }
       }
     });
   },

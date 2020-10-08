@@ -1,6 +1,6 @@
 import axios from "axios";
-import { helpers } from "../libs";
-import { auth } from "../libs/firebase";
+import { helpers } from "@/libs";
+import { auth } from "@/libs/firebase";
 import * as Vuex from "vuex";
 
 type Context = Vuex.ActionContext<object, any>;

@@ -8,12 +8,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FileUploader } from "../components";
+import { FileUploader } from "@/components";
 
 export default Vue.extend({
   name: "Upload",
   components: {
-    FileUploader
-  }
+    FileUploader,
+  },
 });
 </script>
