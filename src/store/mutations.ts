@@ -1,17 +1,19 @@
+import { State, Error } from "./state";
+
 export default {
-  setLoading: (state, payload) => {
+  setLoading: (state: State, payload: boolean) => {
     state.isLoading = payload;
   },
-  setReportData: (state, payload) => {
+  setReportData: (state: State, payload: object) => {
     state.reportData = { ...payload };
   },
-  setFileData: (state, payload) => {
+  setFileData: (state: State, payload: any) => {
     state.file = payload;
   },
-  setFilter: (state, payload) => {
+  setFilter: (state: State, payload: object) => {
     state.filter = payload;
   },
-  setRequestProgress: (state, payload) => {
+  setRequestProgress: (state: State, payload: Error) => {
     if (state.isLoading) {
       state.isLoading = false;
     } else {

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import { Reports, About, Upload, Home, NotFound } from "../views";
+import { Reports, About, Upload, Home, NotFound } from "@/views";
 
 Vue.use(VueRouter);
 

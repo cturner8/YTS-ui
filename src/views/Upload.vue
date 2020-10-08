@@ -6,13 +6,14 @@
   </div>
 </template>
 
-<script>
-import { FileUploader } from "../components";
+<script lang="ts">
+import Vue from "vue";
+import { FileUploader } from "@/components";
 
-export default {
+export default Vue.extend({
   name: "Upload",
   components: {
-    FileUploader
-  }
-};
+    FileUploader,
+  },
+});
 </script>

@@ -1,5 +1,5 @@
-const sortItems = (input = {}) => {
-  let returnData = {};
+const sortItems = (input: any = {}) => {
+  let returnData: any = {};
 
   Object.keys(input)
     .sort((a, b) => input[b] - input[a])

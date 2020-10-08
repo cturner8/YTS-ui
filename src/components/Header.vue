@@ -32,8 +32,9 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
   name: "Header",
   props: ["user", "signIn", "signOut"],
   data() {
@@ -43,5 +44,5 @@ export default {
       name: "Cameron"
     };
   }
-};
+});
 </script>

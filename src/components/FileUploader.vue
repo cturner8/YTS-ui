@@ -45,10 +45,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { mapActions, mapState } from "vuex";
 
-export default {
+export default Vue.extend({
   name: "FileUploader",
   data() {
     return {
@@ -90,5 +91,5 @@ export default {
       }
     }
   }
-};
+});
 </script>

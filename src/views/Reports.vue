@@ -4,11 +4,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { Tables } from "../components";
 import { mapState } from "vuex";
 
-export default {
+export default Vue.extend({
   name: "Reports",
   components: {
     Tables
@@ -19,5 +20,5 @@ export default {
   computed: {
     ...mapState(["reportData"])
   }
-};
+});
 </script>

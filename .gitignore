@@ -24,3 +24,4 @@ pnpm-debug.log*
 *.sw?
 
 src/libs/config.js
+config.ts

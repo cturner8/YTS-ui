@@ -1,8 +1,11 @@
 import axios from "axios";
-import { helpers } from "../libs";
-import { auth } from "../libs/firebase";
+import { helpers } from "@/libs";
+import { auth } from "@/libs/firebase";
+import * as Vuex from "vuex";
 
-axios.interceptors.request.use(async (config) => {
+type Context = Vuex.ActionContext<object, any>;
+
+axios.interceptors.request.use(async (config: any) => {
   try {
     const { currentUser } = auth;
     if (!currentUser) throw "not logged in";
@@ -19,12 +22,12 @@ axios.interceptors.request.use(async (config) => {
   }
 });
 
-const searchData = async (body) => {
+const searchData = async (body: object) => {
   return await axios.post(`${process.env.VUE_APP_DATA_ENDPOINT}`, body);
 };
 
 export default {
-  searchReportData: async ({ commit }, body) => {
+  searchReportData: async ({ commit }: Context, body: object) => {
     commit("setRequestProgress", undefined);
     try {
       const { data } = await searchData(body);
@@ -35,7 +38,10 @@ export default {
       commit("setRequestProgress", true);
     }
   },
-  submitFiles: async ({ commit }, { file, filter }) => {
+  submitFiles: async (
+    { commit }: Context,
+    { file, filter }: { file: Blob; filter: object }
+  ) => {
     commit("setRequestProgress", undefined);
 
     const reader = new FileReader();
@@ -43,7 +49,7 @@ export default {
     reader.readAsText(file);
     reader.onload = async () => {
       try {
-        const fileData = JSON.parse(reader.result);
+        const fileData = JSON.parse(reader.result as any);
         const body = {
           fileData,
           ...filter,
