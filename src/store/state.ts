@@ -5,7 +5,7 @@ export interface State {
   reportData: object;
   file: any;
   filter: object;
-  error: boolean | undefined;
+  error: Error;
 }
 
 export default {
