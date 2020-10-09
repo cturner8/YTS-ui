@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <b-navbar variant="dark" type="dark">
-      <b-navbar-brand>
+      <b-navbar-brand class="heading">
         <img src="../assets/youtube.svg" class="img-fluid" alt loading="lazy" />
         YouTube Data Analysis
       </b-navbar-brand>
