@@ -23,10 +23,10 @@
         <b-nav-item to="/upload" right>Upload</b-nav-item>
         <b-nav-item to="/reports" right>Reports</b-nav-item>
         <b-nav-item to="/about" right>About</b-nav-item>
-        <b-button @click="signOut">Logout</b-button>
+        <b-button @click="signOut" class="logout">Logout</b-button>
       </b-navbar-nav>
       <b-navbar-nav v-else class="ml-auto">
-        <b-button @click="signIn">Login</b-button>
+        <b-button @click="signIn" class="login">Login</b-button>
       </b-navbar-nav>
     </b-navbar>
   </div>
