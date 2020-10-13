@@ -66,5 +66,19 @@ describe("Header.vue", () => {
     const button = wrapper.find(".login");
     await button.trigger("click");
     expect(signIn).toBeCalled();
-  })
+  });
+  it("calls logout function on click", async () => {
+    const signOut = jest.fn();
+    const input = {
+        props: {
+          user: testUser,
+          signOut
+      }
+    };
+
+    const wrapper = factory(input, true);
+    const button = wrapper.find(".logout");
+    await button.trigger("click");
+    expect(signOut).toBeCalled();
+  });
 });
