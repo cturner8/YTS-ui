@@ -6,23 +6,18 @@
         YouTube Data Analysis
       </b-navbar-brand>
       <b-nav-text>
-        <span v-if="has_filters">
-          <strong>Filters:</strong>
-          <span v-for="[key, value] in Object.entries(filter)" :key="key">
-            {{ key }} [
-            <strong>{{ value }}</strong>
-            ]
-          </span>
-        </span>
-        <b-nav-text class="ml-auto" v-else right
+        <b-nav-text class="ml-auto" right
           >Gain insight into your YouTube data</b-nav-text
         >
       </b-nav-text>
       <b-navbar-nav v-if="user" class="ml-auto">
-        <b-nav-item to="/" right>Home</b-nav-item>
-        <b-nav-item to="/upload" right>Upload</b-nav-item>
-        <b-nav-item to="/reports" right>Reports</b-nav-item>
-        <b-nav-item to="/about" right>About</b-nav-item>
+        <b-nav-item 
+          v-for="item in navItems" 
+          :key="item.text" 
+          :to="item.path"
+          right>
+            {{ item.text }}
+        </b-nav-item>
         <b-button @click="signOut" class="logout">Logout</b-button>
       </b-navbar-nav>
       <b-navbar-nav v-else class="ml-auto">
@@ -39,9 +34,12 @@ export default Vue.extend({
   props: ["user", "signIn", "signOut"],
   data() {
     return {
-      has_filters: false,
-      filter: {},
-      name: "Cameron"
+      navItems: [
+        { text: "Home", path: "/" },
+        { text: "Upload", path: "/upload" },
+        { text: "Reports", path: "/reports" },
+        { text: "About", path: "/about" },
+      ]
     };
   }
 });

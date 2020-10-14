@@ -1,5 +1,5 @@
 import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
-import { BootstrapVue } from "bootstrap-vue";
+import { BootstrapVue, BNavItem } from "bootstrap-vue";
 
 import Header from "../Header.vue";
 
@@ -81,4 +81,23 @@ describe("Header.vue", () => {
     await button.trigger("click");
     expect(signOut).toBeCalled();
   });
+  it("renders nav items", () => {
+    const navItems = [
+      { text: "Home", path: "/" },
+      { text: "Test", path: "/test" },
+    ];
+
+    const input = {
+      props: {
+        user: testUser
+      },
+      data: {
+        navItems
+      }
+    };
+
+    const wrapper = factory(input);
+    const items = wrapper.findAllComponents(BNavItem);
+    expect(items).toHaveLength(navItems.length);
+  })
 });
