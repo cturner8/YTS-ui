@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 src/libs/config.js
 config.ts
+.firebase
