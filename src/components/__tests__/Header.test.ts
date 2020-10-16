@@ -12,12 +12,12 @@ const testUser = {
   phoneNumber: "+441111111111",
   uid: "75oZtbawx7Typ3A88ErHocNvFnG3",
   isAnonymous: false,
-  emailVerified: true
+  emailVerified: true,
 };
 
 const factory = ({ data = {}, props = {}, mocks = {} }, fullMount = false) => {
- const method = fullMount ? mount : shallowMount;
- 
+  const method = fullMount ? mount : shallowMount;
+
   return method(Header, {
     localVue,
     data() {
@@ -29,8 +29,8 @@ const factory = ({ data = {}, props = {}, mocks = {} }, fullMount = false) => {
       ...props,
     },
     mocks: {
-      ...mocks
-    }
+      ...mocks,
+    },
   });
 };
 
@@ -45,10 +45,10 @@ describe("Header.vue", () => {
     expect(wrapper.find(".logout").exists()).toBeFalsy();
   });
   it("renders logout button", () => {
-    const input = { 
-      props: { 
-        user: testUser 
-      } 
+    const input = {
+      props: {
+        user: testUser,
+      },
     };
     const wrapper = factory(input);
     expect(wrapper.find(".login").exists()).toBeFalsy();
@@ -57,9 +57,9 @@ describe("Header.vue", () => {
   it("calls login function on click", async () => {
     const signIn = jest.fn();
     const input = {
-        props: {
-          signIn
-      }
+      props: {
+        signIn,
+      },
     };
 
     const wrapper = factory(input, true);
@@ -70,10 +70,10 @@ describe("Header.vue", () => {
   it("calls logout function on click", async () => {
     const signOut = jest.fn();
     const input = {
-        props: {
-          user: testUser,
-          signOut
-      }
+      props: {
+        user: testUser,
+        signOut,
+      },
     };
 
     const wrapper = factory(input, true);
@@ -89,11 +89,11 @@ describe("Header.vue", () => {
 
     const input = {
       props: {
-        user: testUser
+        user: testUser,
       },
       data: {
-        navItems
-      }
+        navItems,
+      },
     };
 
     const wrapper = factory(input);
