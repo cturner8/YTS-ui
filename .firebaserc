@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "yts-data-289517"
+  },
+  "targets": {
+    "yts-data-289517": {
+      "hosting": {
+        "test": [
+          "yts-test"
+        ]
+      }
+    }
+  }
+}
