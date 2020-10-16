@@ -1,5 +1,5 @@
 import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
-import { BootstrapVue, BNavItem } from "bootstrap-vue";
+import { BootstrapVue, BNavItem, BButton } from "bootstrap-vue";
 
 import Header from "../Header.vue";
 
@@ -99,5 +99,5 @@ describe("Header.vue", () => {
     const wrapper = factory(input);
     const items = wrapper.findAllComponents(BNavItem);
     expect(items).toHaveLength(navItems.length);
-  })
+  });
 });

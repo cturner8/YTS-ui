@@ -12,13 +12,13 @@ import { mapState } from "vuex";
 export default Vue.extend({
   name: "Reports",
   components: {
-    Tables
+    Tables,
   },
   data() {
     return {};
   },
   computed: {
-    ...mapState(["reportData"])
-  }
+    ...mapState(["reportData"]),
+  },
 });
 </script>

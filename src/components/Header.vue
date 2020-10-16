@@ -11,12 +11,13 @@
         >
       </b-nav-text>
       <b-navbar-nav v-if="user" class="ml-auto">
-        <b-nav-item 
-          v-for="item in navItems" 
-          :key="item.text" 
+        <b-nav-item
+          v-for="item in navItems"
+          :key="item.text"
           :to="item.path"
-          right>
-            {{ item.text }}
+          right
+        >
+          {{ item.text }}
         </b-nav-item>
         <b-button @click="signOut" class="logout">Logout</b-button>
       </b-navbar-nav>
@@ -39,8 +40,8 @@ export default Vue.extend({
         { text: "Upload", path: "/upload" },
         { text: "Reports", path: "/reports" },
         { text: "About", path: "/about" },
-      ]
+      ],
     };
-  }
+  },
 });
 </script>

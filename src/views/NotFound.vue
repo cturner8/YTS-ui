@@ -8,6 +8,6 @@ export default Vue.extend({
   name: "NotFound",
   data() {
     return {};
-  }
+  },
 });
 </script>

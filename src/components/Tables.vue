@@ -1,8 +1,8 @@
 <template>
   <div class="table-container">
-    <b-container fluid>
+    <b-container v-if="items" fluid>
       <b-row v-if="items.channels || items.raw_data">
-        <b-col class="contentDivs" v-if="items.channels">
+        <b-col class="contentDivs channels" v-if="items.channels">
           <h2>Most popular channels</h2>
           <b-list-group>
             <b-list-group-item
@@ -16,7 +16,7 @@
             </b-list-group-item>
           </b-list-group>
         </b-col>
-        <b-col class="contentDivs" v-if="items.raw_data">
+        <b-col class="contentDivs raw-data" v-if="items.raw_data">
           <h2>Videos watched</h2>
           <b-list-group v-for="(item, index) in items.raw_data" :key="index">
             <b-list-group-item v-if="item.subtitles">
@@ -40,10 +40,10 @@ import Vue from "vue";
 export default Vue.extend({
   name: "Tables",
   props: {
-    items: Object
+    items: Object,
   },
   data() {
     return {};
-  }
+  },
 });
 </script>
