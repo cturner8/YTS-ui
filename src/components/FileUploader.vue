@@ -23,11 +23,25 @@
         </b-form-group>
 
         <b-form-group label="Date From:" label-for="dateFrom">
-          <b-form-input id="dateFrom" v-model="filter.dateFrom" type="text" />
+          <b-form-datepicker
+            id="dateFrom"
+            v-model="filter.dateFrom"
+            class="mb-2"
+            :max="new Date()"
+            :hide-header="true"
+            placeholder=""
+          />
         </b-form-group>
 
         <b-form-group label="Date To:" label-for="dateTo">
-          <b-form-input id="dateTo" v-model="filter.dateTo" type="text" />
+          <b-form-datepicker
+            id="dateTo"
+            v-model="filter.dateTo"
+            class="mb-2"
+            :max="new Date()"
+            :hide-header="true"
+            placeholder=""
+          />
         </b-form-group>
 
         <b-button
