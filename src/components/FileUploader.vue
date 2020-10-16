@@ -54,7 +54,7 @@ export default Vue.extend({
   data() {
     return {
       file: null,
-      filter: {}
+      filter: {},
     };
   },
   computed: {
@@ -68,7 +68,7 @@ export default Vue.extend({
         default:
           return "";
       }
-    }
+    },
   },
   methods: {
     ...mapActions(["submitFiles"]),
@@ -89,7 +89,7 @@ export default Vue.extend({
         default:
           return;
       }
-    }
-  }
+    },
+  },
 });
 </script>
