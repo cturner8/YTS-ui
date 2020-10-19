@@ -38,9 +38,10 @@ export default Vue.extend({
         this.setAuthUser(user);
       } else {
         this.setAuthUser(null);
-        if (router.currentRoute.path !== "/") {
-          router.push("/");
-        }
+      }
+
+      if (router.currentRoute.path !== "/") {
+        router.push("/");
       }
     });
   },

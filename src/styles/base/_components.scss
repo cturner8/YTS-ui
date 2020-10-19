@@ -17,6 +17,10 @@
 
 #nav a.router-link-exact-active {
   color: $red;
+
+  &.btn {
+    color: $white;
+  }
 }
 
 .header {

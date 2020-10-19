@@ -22,7 +22,7 @@
         <b-button @click="signOut" class="logout">Logout</b-button>
       </b-navbar-nav>
       <b-navbar-nav v-else class="ml-auto">
-        <b-button @click="signIn" class="login">Login</b-button>
+        <b-button to="/login" class="login">Login</b-button>
       </b-navbar-nav>
     </b-navbar>
   </div>

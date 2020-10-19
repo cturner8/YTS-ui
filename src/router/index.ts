@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import { Reports, About, Upload, Home, NotFound } from "@/views";
+import { Reports, About, Upload, Home, NotFound, Login } from "@/views";
 import { auth } from "@/libs/firebase";
 
 Vue.use(VueRouter);
@@ -30,6 +30,12 @@ const routes = [
     name: "Upload",
     component: Upload,
     meta: { private: true },
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+    meta: { priviate: false },
   },
   {
     path: "*",

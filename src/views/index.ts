@@ -3,5 +3,6 @@ import Upload from "./Upload.vue";
 import About from "./About.vue";
 import Home from "./Home.vue";
 import NotFound from "./NotFound.vue";
+import Login from "./Login.vue";
 
-export { Reports, Upload, About, Home, NotFound };
+export { Reports, Upload, About, Home, NotFound, Login };
