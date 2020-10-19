@@ -1,4 +1,4 @@
-import { State, Error } from "./state";
+import { State, Error, User } from "./state";
 
 export default {
   setLoading: (state: State, payload: boolean) => {
@@ -21,5 +21,8 @@ export default {
     }
 
     state.error = payload;
+  },
+  setAuthUser: (state: State, user: User) => {
+    state.user = user;
   },
 };
