@@ -28,7 +28,19 @@
     <div class="divider-bottom"></div>
     <div>
       <b-button variant="outline-danger" to="/about">Learn More</b-button>
-      <b-button variant="danger" to="/upload">Get Started</b-button>
+      <b-button v-if="user" variant="danger" to="/upload">Get Started</b-button>
+      <b-button v-else to="/login">Login to get started</b-button>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+import { mapState } from "vuex";
+export default Vue.extend({
+  name: "Home",
+  computed: {
+    ...mapState(["user"]),
+  },
+});
+</script>
