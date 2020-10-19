@@ -1,4 +1,5 @@
 export type Error = boolean | undefined;
+export type User = firebase.User | null;
 
 export interface State {
   isLoading: boolean;
@@ -6,6 +7,7 @@ export interface State {
   file: any;
   filter: object;
   error: Error;
+  user: User;
 }
 
 export default {
@@ -14,4 +16,5 @@ export default {
   file: null,
   filter: {},
   error: undefined,
+  user: null,
 };

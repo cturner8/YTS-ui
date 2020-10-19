@@ -67,4 +67,18 @@ export default {
       }
     };
   },
+  anonymousSignIn: async () => {
+    try {
+      await auth.signInAnonymously();
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  signOut: async () => {
+    try {
+      await auth.signOut();
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };
