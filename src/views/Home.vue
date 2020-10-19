@@ -29,7 +29,6 @@
     <div>
       <b-button variant="outline-danger" to="/about">Learn More</b-button>
       <b-button v-if="user" variant="danger" to="/upload">Get Started</b-button>
-      <b-button v-else to="/login">Login to get started</b-button>
     </div>
   </div>
 </template>
