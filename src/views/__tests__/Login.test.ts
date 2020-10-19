@@ -9,7 +9,7 @@ localVue.use(BootstrapVue);
 localVue.use(Vuex);
 
 const factory = (
-  { data = {}, props = {}, mocks = {}, methods = {} },
+  { data = {}, props = {} },
   store: Store<object>,
   fullMount = false
 ) => {
@@ -26,12 +26,6 @@ const factory = (
     propsData: {
       ...props,
     },
-    mocks: {
-      ...mocks,
-    },
-    methods: {
-      ...methods,
-    },
   });
 };
 
@@ -42,6 +36,7 @@ describe("Header.vue", () => {
   beforeEach(() => {
     actions = {
       anonymousSignIn: jest.fn(),
+      signIn: jest.fn(),
     };
     store = new Vuex.Store({
       actions,
@@ -68,5 +63,25 @@ describe("Header.vue", () => {
     const button = wrapper.find(".anon-signin");
     await button.trigger("click");
     expect(actions.anonymousSignIn).toBeCalled();
+  });
+  it("renders main login form", () => {
+    const input = {};
+
+    const wrapper = factory(input, store);
+    expect(wrapper.find(".signin-form").exists()).toBeTruthy();
+  });
+  it("user can sign in", async () => {
+    const authData = { email: "test@test.com", password: "testPassword123" };
+    const input = {
+      data: {
+        authData,
+      },
+    };
+
+    const wrapper = factory(input, store, true);
+    const form = wrapper.find(".signin-form");
+    await form.trigger("submit");
+    expect(actions.signIn).toHaveBeenCalled();
+    // expect(actions.signIn).toHaveBeenCalledWith(authData);
   });
 });
