@@ -1,13 +1,13 @@
 import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
 import { BootstrapVue } from "bootstrap-vue";
-import Vuex, { Store } from "vuex";
+import Vuex from "vuex";
 import sinon from "sinon";
 
 import { auth } from "@/libs/firebase";
 import firebase from "firebase/app";
 
 import Login from "../Login.vue";
-import store from "@/store";
+import actions from "@/store/actions";
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
@@ -26,12 +26,9 @@ const mockFirebase = () => {
   auth.signInWithEmailAndPassword = mockSignIn;
 };
 
-const factory = (
-  { data = {}, props = {} },
-  store: Store<object>,
-  fullMount = false
-) => {
+const factory = ({ data = {}, props = {} }, fullMount = false) => {
   const method = fullMount ? mount : shallowMount;
+  const store = new Vuex.Store({ actions });
 
   return method(Login, {
     store,
@@ -54,18 +51,18 @@ describe("Login.vue", () => {
   });
 
   it("renders successfully", () => {
-    const wrapper = factory({}, store);
+    const wrapper = factory({});
     expect(wrapper.exists()).toBeTruthy();
   });
   it("renders anonymous sign in button", () => {
-    const wrapper = factory({}, store);
+    const wrapper = factory({});
     const button = wrapper.find(".anon-signin");
     expect(button.exists()).toBeTruthy();
   });
   it("user can sign in annonymously", async () => {
     const input = {};
 
-    const wrapper = factory(input, store, true);
+    const wrapper = factory(input, true);
     const button = wrapper.find(".anon-signin");
     await button.trigger("click");
     expect(mockAnonymousSignIn).toBeCalled();
@@ -73,7 +70,7 @@ describe("Login.vue", () => {
   it("renders main login form", () => {
     const input = {};
 
-    const wrapper = factory(input, store);
+    const wrapper = factory(input);
     expect(wrapper.find(".signin-form").exists()).toBeTruthy();
   });
   it("user can sign in", async () => {
@@ -84,7 +81,7 @@ describe("Login.vue", () => {
       },
     };
 
-    const wrapper = factory(input, store, true);
+    const wrapper = factory(input, true);
     const form = wrapper.find(".signin-form");
     await form.trigger("submit");
     expect(mockSignIn).toHaveBeenCalled();
