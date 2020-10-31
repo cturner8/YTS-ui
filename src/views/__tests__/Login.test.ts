@@ -1,12 +1,30 @@
 import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
 import { BootstrapVue } from "bootstrap-vue";
-import Vuex, { Store, ActionTree } from "vuex";
+import Vuex, { Store } from "vuex";
+import sinon from "sinon";
+
+import { auth } from "@/libs/firebase";
+import firebase from "firebase/app";
 
 import Login from "../Login.vue";
+import store from "@/store";
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
 localVue.use(Vuex);
+
+const mockSignIn = jest.fn();
+const mockSignOut = jest.fn();
+const mockAnonymousSignIn = jest.fn();
+
+const mockFirebase = () => {
+  sinon.stub(auth);
+  sinon.stub(firebase).initializeApp.resolves();
+
+  auth.signInAnonymously = mockAnonymousSignIn;
+  auth.signOut = mockSignOut;
+  auth.signInWithEmailAndPassword = mockSignIn;
+};
 
 const factory = (
   { data = {}, props = {} },
@@ -29,22 +47,10 @@ const factory = (
   });
 };
 
-describe("Header.vue", () => {
-  let actions: ActionTree<object, object>;
-  let store: Store<object>;
-
-  beforeEach(() => {
-    actions = {
-      anonymousSignIn: jest.fn(),
-      signIn: jest.fn(),
-    };
-    store = new Vuex.Store({
-      actions,
-    });
-  });
-
-  afterEach(() => {
-    actions = {};
+describe("Login.vue", () => {
+  beforeAll(() => {
+    jest.resetModules();
+    mockFirebase();
   });
 
   it("renders successfully", () => {
@@ -62,7 +68,7 @@ describe("Header.vue", () => {
     const wrapper = factory(input, store, true);
     const button = wrapper.find(".anon-signin");
     await button.trigger("click");
-    expect(actions.anonymousSignIn).toBeCalled();
+    expect(mockAnonymousSignIn).toBeCalled();
   });
   it("renders main login form", () => {
     const input = {};
@@ -81,7 +87,7 @@ describe("Header.vue", () => {
     const wrapper = factory(input, store, true);
     const form = wrapper.find(".signin-form");
     await form.trigger("submit");
-    expect(actions.signIn).toHaveBeenCalled();
-    // expect(actions.signIn).toHaveBeenCalledWith(authData);
+    expect(mockSignIn).toHaveBeenCalled();
+    expect(mockSignIn).toHaveBeenCalledWith(authData.email, authData.password);
   });
 });
