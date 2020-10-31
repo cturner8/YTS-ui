@@ -16,6 +16,17 @@ localVue.use(Vuex);
 const mockSignIn = jest.fn();
 const mockSignOut = jest.fn();
 const mockAnonymousSignIn = jest.fn();
+const mockCreateUser = jest.fn(
+  () =>
+    ({
+      user: {
+        email: "test@test.com",
+        uid: "test",
+        updateProfile: mockUpdateProfile,
+      },
+    } as any)
+);
+const mockUpdateProfile = jest.fn();
 
 const mockFirebase = () => {
   sinon.stub(auth);
@@ -24,6 +35,7 @@ const mockFirebase = () => {
   auth.signInAnonymously = mockAnonymousSignIn;
   auth.signOut = mockSignOut;
   auth.signInWithEmailAndPassword = mockSignIn;
+  auth.createUserWithEmailAndPassword = mockCreateUser;
 };
 
 const factory = ({ data = {}, props = {} }, fullMount = false) => {
@@ -82,9 +94,40 @@ describe("Login.vue", () => {
     };
 
     const wrapper = factory(input, true);
-    const form = wrapper.find(".signin-form");
-    await form.trigger("submit");
+    expect(wrapper.vm.$data.isLoggingIn).toBe(true);
+    const button = wrapper.find(".submit-button");
+    await button.trigger("click");
     expect(mockSignIn).toHaveBeenCalled();
     expect(mockSignIn).toHaveBeenCalledWith(authData.email, authData.password);
+  });
+  it("user can sign up", async () => {
+    const authData = {
+      email: "test@test.com",
+      password: "testPassword123",
+      displayName: "test",
+    };
+    const input = {
+      data: {
+        authData,
+      },
+    };
+
+    const wrapper = factory(input, true);
+    const toggleButton = wrapper.find(".toggle-button");
+    await toggleButton.trigger("click");
+    expect(wrapper.vm.$data.isLoggingIn).toBe(false);
+    const displayName = wrapper.find(".display-name");
+    expect(displayName.exists()).toBeTruthy();
+    const submitButton = wrapper.find(".submit-button");
+    await submitButton.trigger("click");
+    expect(mockCreateUser).toHaveBeenCalled();
+    expect(mockCreateUser).toHaveBeenCalledWith(
+      authData.email,
+      authData.password
+    );
+    expect(mockUpdateProfile).toHaveBeenCalled();
+    expect(mockUpdateProfile).toHaveBeenCalledWith({
+      displayName: authData.displayName,
+    });
   });
 });

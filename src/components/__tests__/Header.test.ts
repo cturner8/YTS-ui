@@ -100,4 +100,16 @@ describe("Header.vue", () => {
     const items = wrapper.findAllComponents(BNavItem);
     expect(items).toHaveLength(navItems.length);
   });
+  it("renders the users display name", () => {
+    const input = {
+      props: {
+        user: testUser,
+      },
+    };
+
+    const wrapper = factory(input);
+    const text = wrapper.find(".user-text");
+    expect(text.exists()).toBeTruthy();
+    expect(text.text()).toContain(testUser.displayName);
+  });
 });

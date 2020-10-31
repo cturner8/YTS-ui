@@ -4,6 +4,7 @@ export type User = firebase.User | null;
 export interface SignInData {
   email: string;
   password: string;
+  displayName: string;
 }
 
 export interface State {

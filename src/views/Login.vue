@@ -9,7 +9,21 @@
     <div>
       <b-container fluid="md">
         <b-row align-h="center">
-          <b-form class="signin-form" novalidate @submit.prevent="handleSignIn">
+          <b-form class="signin-form" novalidate>
+            <b-form-group
+              v-if="!isLoggingIn"
+              class="display-name"
+              id="input-group-3"
+              label="Display name:"
+              label-for="input-3"
+            >
+              <b-form-input
+                id="input-3"
+                v-model="authData.displayName"
+                type="text"
+                required
+              />
+            </b-form-group>
             <b-form-group
               id="input-group-1"
               label="Email address:"
@@ -36,11 +50,18 @@
               />
             </b-form-group>
 
-            <b-button class="mx-2 submit-button" type="submit" variant="danger"
+            <b-button
+              class="mx-2 submit-button"
+              @click="handleSubmit"
+              type="button"
+              variant="danger"
               >Submit</b-button
             >
-            <b-button class="mx-2" type="reset" variant="outline-danger"
-              >Signup</b-button
+            <b-button
+              class="mx-2 toggle-button"
+              @click="handleToggle"
+              variant="outline-danger"
+              >{{ isLoggingIn ? "Signup" : "Login" }}</b-button
             >
           </b-form>
         </b-row>
@@ -55,6 +76,7 @@ import { mapActions } from "vuex";
 
 interface IData {
   authData: object;
+  isLoggingIn: boolean;
 }
 
 export default Vue.extend({
@@ -62,12 +84,20 @@ export default Vue.extend({
   data(): IData {
     return {
       authData: {},
+      isLoggingIn: true,
     };
   },
   methods: {
-    ...mapActions(["anonymousSignIn", "signIn"]),
-    handleSignIn() {
-      this.signIn(this.authData);
+    ...mapActions(["anonymousSignIn", "signIn", "signUp"]),
+    handleSubmit() {
+      if (this.isLoggingIn) {
+        this.signIn(this.authData);
+      } else {
+        this.signUp(this.authData);
+      }
+    },
+    handleToggle() {
+      this.isLoggingIn = !this.isLoggingIn;
     },
   },
 });

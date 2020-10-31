@@ -89,4 +89,20 @@ export default {
       console.log(e);
     }
   },
+  signUp: async (
+    context: Context,
+    { email, password, displayName }: SignInData
+  ) => {
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (displayName) {
+        await user?.updateProfile({ displayName });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

@@ -6,7 +6,10 @@
         YouTube Data Analysis
       </b-navbar-brand>
       <b-nav-text>
-        <b-nav-text class="ml-auto" right
+        <b-nav-text v-if="displayName" class="ml-auto user-text" right
+          >Welcome back {{ displayName }}!</b-nav-text
+        >
+        <b-nav-text v-else class="ml-auto" right
           >Gain insight into your YouTube data</b-nav-text
         >
       </b-nav-text>
@@ -42,6 +45,18 @@ export default Vue.extend({
         { text: "About", path: "/about" },
       ],
     };
+  },
+  computed: {
+    displayName() {
+      let displayName = "";
+      if (!this.user) return displayName;
+
+      if (this.user.displayName) {
+        displayName = this.user.displayName;
+      }
+
+      return displayName;
+    },
   },
 });
 </script>
