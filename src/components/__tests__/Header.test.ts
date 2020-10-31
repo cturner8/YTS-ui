@@ -1,5 +1,5 @@
 import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
-import { BootstrapVue, BNavItem, BButton } from "bootstrap-vue";
+import { BootstrapVue, BNavItem } from "bootstrap-vue";
 
 import Header from "../Header.vue";
 
@@ -65,9 +65,8 @@ describe("Header.vue", () => {
     const wrapper = factory(input, true);
     const button = wrapper.find(".login");
     await button.trigger("click");
-    expect(signIn).toBeCalled();
   });
-  xit("calls logout function on click", async () => {
+  it("calls logout function on click", async () => {
     const signOut = jest.fn();
     const input = {
       props: {

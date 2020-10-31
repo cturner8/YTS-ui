@@ -12,9 +12,36 @@ const testItems = {
     channel2: 100,
   },
   raw_data: [
-    { header: "YouTube", time: "2020-07-22T15:02:06.316Z", title: "Video 1" },
-    { header: "YouTube", time: "2020-07-22T15:02:06.316Z", title: "Video 2" },
-    { header: "YouTube", time: "2020-07-22T15:02:06.316Z", title: "Video 3" },
+    {
+      header: "YouTube",
+      time: "2020-07-22T15:02:06.316Z",
+      title: "Video 1",
+      subtitles: [
+        {
+          name: "Test Channel 1",
+        },
+      ],
+    },
+    {
+      header: "YouTube",
+      time: "2020-07-22T15:02:06.316Z",
+      title: "Video 2",
+      subtitles: [
+        {
+          name: "Test Channel 2",
+        },
+      ],
+    },
+    {
+      header: "YouTube",
+      time: "2020-07-22T15:02:06.316Z",
+      title: "Video 3",
+      subtitles: [
+        {
+          name: "Test Channel 1",
+        },
+      ],
+    },
   ],
 };
 
@@ -43,7 +70,7 @@ describe("Tables.vue", () => {
     const wrapper = factory(input);
     expect(wrapper.exists()).toBeTruthy();
   });
-  xit("renders channels section", () => {
+  it("renders channels section", () => {
     const input = {
       props: {
         items: {
@@ -51,8 +78,24 @@ describe("Tables.vue", () => {
         },
       },
     };
-    const wrapper = factory(input);
-    const channelsSection = wrapper.find("");
-    expect(wrapper.exists()).toBeTruthy();
+    const wrapper = factory(input, true);
+    const channelsSection = wrapper.find(".channels");
+    expect(channelsSection.exists()).toBeTruthy();
+    const listItems = wrapper.findAll(".list-group-item");
+    expect(listItems.length).toBe(Object.keys(testItems.channels).length);
+  });
+  it("renders raw data section", () => {
+    const input = {
+      props: {
+        items: {
+          raw_data: testItems.raw_data,
+        },
+      },
+    };
+    const wrapper = factory(input, true);
+    const dataSection = wrapper.find(".raw-data");
+    expect(dataSection.exists()).toBeTruthy();
+    const listItems = wrapper.findAll(".list-group-item");
+    expect(listItems.length).toBe(testItems.raw_data.length);
   });
 });
