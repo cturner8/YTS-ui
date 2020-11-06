@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: echo "export const firebaseConfig = {};" >> config2.ts
+      - run: echo "export const firebaseConfig = {};" >> config.ts
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
