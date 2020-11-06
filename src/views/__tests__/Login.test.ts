@@ -1,4 +1,4 @@
-import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
+import { mount, createLocalVue } from "@vue/test-utils";
 import { BootstrapVue } from "bootstrap-vue";
 import Vuex from "vuex";
 import sinon from "sinon";
@@ -7,7 +7,9 @@ import { auth } from "@/libs/firebase";
 import firebase from "firebase/app";
 
 import Login from "../Login.vue";
+
 import actions from "@/store/actions";
+import mutations from "@/store/mutations";
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
@@ -38,9 +40,9 @@ const mockFirebase = () => {
   auth.createUserWithEmailAndPassword = mockCreateUser;
 };
 
-const factory = ({ data = {}, props = {} }, fullMount = false) => {
-  const method = fullMount ? mount : shallowMount;
-  const store = new Vuex.Store({ actions });
+const factory = ({ data = {}, props = {} }) => {
+  const method = mount;
+  const store = new Vuex.Store({ actions, mutations });
 
   return method(Login, {
     store,
@@ -74,7 +76,7 @@ describe("Login.vue", () => {
   it("user can sign in annonymously", async () => {
     const input = {};
 
-    const wrapper = factory(input, true);
+    const wrapper = factory(input);
     const button = wrapper.find(".anon-signin");
     await button.trigger("click");
     expect(mockAnonymousSignIn).toBeCalled();
@@ -93,7 +95,7 @@ describe("Login.vue", () => {
       },
     };
 
-    const wrapper = factory(input, true);
+    const wrapper = factory(input);
     expect(wrapper.vm.$data.isLoggingIn).toBe(true);
     const button = wrapper.find(".submit-button");
     await button.trigger("click");
@@ -112,7 +114,7 @@ describe("Login.vue", () => {
       },
     };
 
-    const wrapper = factory(input, true);
+    const wrapper = factory(input);
     const toggleButton = wrapper.find(".toggle-button");
     await toggleButton.trigger("click");
     expect(wrapper.vm.$data.isLoggingIn).toBe(false);

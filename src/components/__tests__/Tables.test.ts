@@ -1,4 +1,4 @@
-import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
+import { mount, createLocalVue } from "@vue/test-utils";
 import { BootstrapVue } from "bootstrap-vue";
 
 import Tables from "../Tables.vue";
@@ -45,8 +45,8 @@ const testItems = {
   ],
 };
 
-const factory = ({ data = {}, props = {}, mocks = {} }, fullMount = false) => {
-  const method = fullMount ? mount : shallowMount;
+const factory = ({ data = {}, props = {}, mocks = {} }) => {
+  const method = mount;
 
   return method(Tables, {
     localVue,
@@ -78,7 +78,7 @@ describe("Tables.vue", () => {
         },
       },
     };
-    const wrapper = factory(input, true);
+    const wrapper = factory(input);
     const channelsSection = wrapper.find(".channels");
     expect(channelsSection.exists()).toBeTruthy();
     const listItems = wrapper.findAll(".list-group-item");
@@ -92,7 +92,7 @@ describe("Tables.vue", () => {
         },
       },
     };
-    const wrapper = factory(input, true);
+    const wrapper = factory(input);
     const dataSection = wrapper.find(".raw-data");
     expect(dataSection.exists()).toBeTruthy();
     const listItems = wrapper.findAll(".list-group-item");

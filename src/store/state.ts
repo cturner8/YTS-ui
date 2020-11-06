@@ -14,6 +14,7 @@ export interface State {
   filter: object;
   error: Error;
   user: User;
+  message: string;
 }
 
 export default {
@@ -23,4 +24,5 @@ export default {
   filter: {},
   error: undefined,
   user: null,
+  message: "",
 };

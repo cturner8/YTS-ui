@@ -1,4 +1,4 @@
-import { shallowMount, mount, createLocalVue } from "@vue/test-utils";
+import { mount, createLocalVue } from "@vue/test-utils";
 import { BootstrapVue, BNavItem } from "bootstrap-vue";
 
 import Header from "../Header.vue";
@@ -16,7 +16,7 @@ const testUser = {
 };
 
 const factory = ({ data = {}, props = {}, mocks = {} }, fullMount = false) => {
-  const method = fullMount ? mount : shallowMount;
+  const method = mount;
 
   return method(Header, {
     localVue,

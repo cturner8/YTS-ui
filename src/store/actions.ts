@@ -82,15 +82,17 @@ export default {
       console.log(e);
     }
   },
-  signIn: async (context: Context, { email, password }: SignInData) => {
+  signIn: async ({ commit }: Context, { email, password }: SignInData) => {
     try {
       await auth.signInWithEmailAndPassword(email, password);
+      commit("setError", "");
     } catch (e) {
       console.log(e);
+      commit("setError", e.message);
     }
   },
   signUp: async (
-    context: Context,
+    { commit }: Context,
     { email, password, displayName }: SignInData
   ) => {
     try {
@@ -101,8 +103,10 @@ export default {
       if (displayName) {
         await user?.updateProfile({ displayName });
       }
+      commit("setError", "");
     } catch (e) {
       console.log(e);
+      commit("setError", e.message);
     }
   },
 };
