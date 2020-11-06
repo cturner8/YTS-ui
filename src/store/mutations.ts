@@ -25,4 +25,7 @@ export default {
   setAuthUser: (state: State, user: User) => {
     state.user = user;
   },
+  setError: (state: State, error: string) => {
+    state.message = error;
+  },
 };

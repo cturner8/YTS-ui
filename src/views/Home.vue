@@ -25,7 +25,6 @@
       nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas
       nulla pariatur?"
     </div>
-    <div class="divider-bottom"></div>
     <div>
       <b-button variant="outline-danger" to="/about">Learn More</b-button>
       <b-button v-if="user" variant="danger" to="/upload">Get Started</b-button>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { helpers } from "@/libs";
 import { auth } from "@/libs/firebase";
 import * as Vuex from "vuex";
+import { SignInData } from "./state";
 
 type Context = Vuex.ActionContext<object, any>;
 
@@ -79,6 +80,33 @@ export default {
       await auth.signOut();
     } catch (e) {
       console.log(e);
+    }
+  },
+  signIn: async ({ commit }: Context, { email, password }: SignInData) => {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      commit("setError", "");
+    } catch (e) {
+      console.log(e);
+      commit("setError", e.message);
+    }
+  },
+  signUp: async (
+    { commit }: Context,
+    { email, password, displayName }: SignInData
+  ) => {
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (displayName) {
+        await user?.updateProfile({ displayName });
+      }
+      commit("setError", "");
+    } catch (e) {
+      console.log(e);
+      commit("setError", e.message);
     }
   },
 };
