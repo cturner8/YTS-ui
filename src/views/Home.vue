@@ -1,6 +1,6 @@
 <template>
   <div class="main-content center home">
-    <h1>Welcome</h1>
+    <h1>Welcome user</h1>
     <div>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
