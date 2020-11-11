@@ -41,6 +41,7 @@ export default Vue.extend({
       navItems: [
         { text: "Home", path: "/" },
         { text: "Upload", path: "/upload" },
+        { text: "Dashboard", path: "/dashboard" },
         { text: "Reports", path: "/reports" },
         { text: "About", path: "/about" },
       ],
